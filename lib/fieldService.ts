@@ -19,21 +19,21 @@ export const fieldService = {
   },
 
   async getFieldById(id: string): Promise<Field> {
-    const response = await api.get(`/fields/${id}/`);
+    const response = await api.get(`/fields/${id}`);
     return response.data;
   },
 
   async createField(fieldData: CreateFieldRequest): Promise<Field> {
-    const response = await api.post("/fields/admin/", fieldData);
+    const response = await api.post("/fields/admin", fieldData);
     return response.data;
   },
 
   async updateField(id: string, fieldData: CreateFieldRequest): Promise<Field> {
-    const response = await api.put(`/fields/admin/${id}/`, fieldData);
+    const response = await api.put(`/fields/admin/${id}`, fieldData);
     return response.data;
   },
 
   async deleteField(id: string): Promise<void> {
-    await api.delete(`/fields/admin/${id}/`);
+    await api.delete(`/fields/admin/${id}`);
   },
 };
