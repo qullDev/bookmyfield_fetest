@@ -51,7 +51,7 @@ export default function UserDashboard() {
       ]);
       setFields(fieldsData);
       setMyBookings(bookingsData);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error: unknown) {
       toast.error("Gagal memuat data");
     } finally {
@@ -243,7 +243,7 @@ export default function UserDashboard() {
                 className={`py-2 px-1 border-b-2 font-medium text-sm ${
                   activeTab === "fields"
                     ? "border-blue-500 text-blue-600"
-                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                    : "border-transparent text-gray-500 hover:text-gray-900 hover:border-gray-300"
                 }`}
               >
                 Cari Lapangan
@@ -253,7 +253,7 @@ export default function UserDashboard() {
                 className={`py-2 px-1 border-b-2 font-medium text-sm ${
                   activeTab === "bookings"
                     ? "border-blue-500 text-blue-600"
-                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                    : "border-transparent text-gray-500 hover:text-gray-900 hover:border-gray-300"
                 }`}
               >
                 Riwayat Booking
@@ -272,7 +272,7 @@ export default function UserDashboard() {
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-900 mb-2">
                     Lokasi
                   </label>
                   <input
@@ -287,7 +287,7 @@ export default function UserDashboard() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-900 mb-2">
                     Harga Minimum
                   </label>
                   <input
@@ -302,7 +302,7 @@ export default function UserDashboard() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-900 mb-2">
                     Harga Maksimum
                   </label>
                   <input
@@ -325,7 +325,7 @@ export default function UserDashboard() {
                   </button>
                   <button
                     onClick={clearFilters}
-                    className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm transition-colors duration-200"
+                    className="bg-gray-200 hover:bg-gray-300 text-gray-900 px-4 py-2 rounded-lg text-sm transition-colors duration-200"
                   >
                     Reset
                   </button>
@@ -488,7 +488,7 @@ export default function UserDashboard() {
               >
                 <div>
                   <label
-                    className="block text-sm font-medium text-gray-700 mb-2"
+                    className="block text-sm font-medium text-gray-900 mb-2"
                     htmlFor="start-time"
                   >
                     Waktu Mulai
@@ -511,7 +511,7 @@ export default function UserDashboard() {
 
                 <div>
                   <label
-                    className="block text-sm font-medium text-gray-700 mb-2"
+                    className="block text-sm font-medium text-gray-900 mb-2"
                     htmlFor="end-time"
                   >
                     Waktu Selesai
@@ -539,7 +539,7 @@ export default function UserDashboard() {
                       setShowBookingForm(false);
                       setSelectedField(null);
                     }}
-                    className="px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors duration-200"
+                    className="px-4 py-2 text-gray-900 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors duration-200"
                   >
                     Batal
                   </button>
