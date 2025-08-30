@@ -28,15 +28,18 @@ export default function AdminDashboard() {
   const loadData = useCallback(async () => {
     try {
       setLoading(true);
+      console.log("Loading admin data...");
       const [fieldsData, bookingsData] = await Promise.all([
         fieldService.getAllFields(),
         bookingService.getAllBookings(),
       ]);
+      console.log("Fields data:", fieldsData);
+      console.log("Bookings data:", bookingsData);
       setFields(fieldsData);
       setBookings(bookingsData);
     } catch (error: unknown) {
       console.error("Load data error:", error);
-      toast.error("Gagal memuat data");
+      toast.error("Gagal memuat data: " + getErrorMessage(error));
     } finally {
       setLoading(false);
     }
@@ -55,11 +58,17 @@ export default function AdminDashboard() {
   const handleCreateField = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      console.log("Creating/updating field:", fieldForm);
       if (editingField) {
-        await fieldService.updateField(editingField.id, fieldForm);
+        const result = await fieldService.updateField(
+          editingField.id,
+          fieldForm
+        );
+        console.log("Update result:", result);
         toast.success("Lapangan berhasil diupdate");
       } else {
-        await fieldService.createField(fieldForm);
+        const result = await fieldService.createField(fieldForm);
+        console.log("Create result:", result);
         toast.success("Lapangan berhasil dibuat");
       }
       setShowFieldForm(false);
@@ -67,7 +76,8 @@ export default function AdminDashboard() {
       setFieldForm({ name: "", location: "", price: 0 });
       loadData();
     } catch (error: unknown) {
-      toast.error(getErrorMessage(error));
+      console.error("Create/update field error:", error);
+      toast.error("Error: " + getErrorMessage(error));
     }
   };
 

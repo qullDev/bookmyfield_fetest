@@ -33,6 +33,7 @@ export default function UserDashboard() {
   const loadData = useCallback(async () => {
     try {
       setLoading(true);
+      console.log("Loading user data with filters:", filters);
       const [fieldsData, bookingsData] = await Promise.all([
         fieldService.getAllFields(
           filters.location || filters.min_price || filters.max_price
@@ -49,15 +50,17 @@ export default function UserDashboard() {
         ),
         bookingService.getMyBookings(),
       ]);
+      console.log("User fields data:", fieldsData);
+      console.log("User bookings data:", bookingsData);
       setFields(fieldsData);
       setMyBookings(bookingsData);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error: unknown) {
-      toast.error("Gagal memuat data");
+      console.error("Load user data error:", error);
+      toast.error("Gagal memuat data: " + getErrorMessage(error));
     } finally {
       setLoading(false);
     }
-  }, [filters.location, filters.min_price, filters.max_price]);
+  }, [filters]);
 
   useEffect(() => {
     // Check authentication and role
