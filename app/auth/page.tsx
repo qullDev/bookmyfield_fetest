@@ -50,6 +50,39 @@ export default function AuthPage() {
         setFormData({ name: "", email: "", password: "" });
       }
     } catch (error: unknown) {
+      console.error("Auth error caught:", error);
+      console.error("Error type:", typeof error);
+      console.error("Error stringify:", JSON.stringify(error, null, 2));
+
+      // Check if it's actually an axios error
+      if (error && typeof error === "object" && "isAxiosError" in error) {
+        const axiosError = error as {
+          isAxiosError: boolean;
+          response?: {
+            status?: number;
+            statusText?: string;
+            data?: unknown;
+            headers?: unknown;
+          };
+        };
+        console.error("Axios error details:", {
+          status: axiosError.response?.status,
+          statusText: axiosError.response?.statusText,
+          data: axiosError.response?.data,
+          headers: axiosError.response?.headers,
+        });
+
+        // If status is 2xx, don't show error
+        if (
+          axiosError.response?.status &&
+          axiosError.response.status >= 200 &&
+          axiosError.response.status < 300
+        ) {
+          console.log("Success response but caught in error handler");
+          return; // Don't show error toast for successful responses
+        }
+      }
+
       toast.error(getErrorMessage(error));
     } finally {
       setLoading(false);

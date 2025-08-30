@@ -3,12 +3,26 @@ import { AuthRequest, LoginResponse } from "@/types";
 
 export const authService = {
   async login(credentials: AuthRequest): Promise<LoginResponse> {
-    const response = await api.post("/auth/login", credentials);
-    return response.data;
+    try {
+      console.log("Attempting login with:", credentials);
+      const response = await api.post("/auth/login", credentials);
+      console.log("Login response received:", response);
+      return response.data;
+    } catch (error) {
+      console.error("Login error:", error);
+      throw error;
+    }
   },
 
   async register(userData: AuthRequest): Promise<void> {
-    await api.post("/auth/register", userData);
+    try {
+      console.log("Attempting register with:", userData);
+      await api.post("/auth/register", userData);
+      console.log("Register successful");
+    } catch (error) {
+      console.error("Register error:", error);
+      throw error;
+    }
   },
 
   async logout(refreshToken: string): Promise<void> {
