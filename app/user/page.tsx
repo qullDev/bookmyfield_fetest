@@ -51,6 +51,7 @@ export default function UserDashboard() {
       ]);
       setFields(fieldsData);
       setMyBookings(bookingsData);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error: unknown) {
       toast.error("Gagal memuat data");
     } finally {
