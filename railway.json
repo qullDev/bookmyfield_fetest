@@ -1,0 +1,13 @@
+{
+  "deploy": {
+    "startCommand": "npm start",
+    "healthcheckPath": "/",
+    "restartPolicyType": "ON_FAILURE"
+  },
+  "build": {
+    "buildCommand": "npm run build"
+  },
+  "environments": {
+    "NODE_ENV": "production"
+  }
+}

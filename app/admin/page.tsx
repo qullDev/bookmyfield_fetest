@@ -35,6 +35,7 @@ export default function AdminDashboard() {
       setFields(fieldsData);
       setBookings(bookingsData);
     } catch (error: unknown) {
+      console.error("Load data error:", error);
       toast.error("Gagal memuat data");
     } finally {
       setLoading(false);
@@ -87,6 +88,7 @@ export default function AdminDashboard() {
         toast.success("Lapangan berhasil dihapus");
         loadData();
       } catch (error: unknown) {
+        console.error("Delete field error:", error);
         toast.error("Gagal menghapus lapangan");
       }
     }
