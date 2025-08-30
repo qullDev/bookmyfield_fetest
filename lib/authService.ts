@@ -3,20 +3,20 @@ import { AuthRequest, LoginResponse } from "@/types";
 
 export const authService = {
   async login(credentials: AuthRequest): Promise<LoginResponse> {
-    const response = await api.post("/auth/login/", credentials);
+    const response = await api.post("/auth/login", credentials);
     return response.data;
   },
 
   async register(userData: AuthRequest): Promise<void> {
-    await api.post("/auth/register/", userData);
+    await api.post("/auth/register", userData);
   },
 
   async logout(refreshToken: string): Promise<void> {
-    await api.post("/auth/logout/", { refresh_token: refreshToken });
+    await api.post("/auth/logout", { refresh_token: refreshToken });
   },
 
   async refreshToken(refreshToken: string): Promise<LoginResponse> {
-    const response = await api.post("/auth/refresh/", {
+    const response = await api.post("/auth/refresh", {
       refresh_token: refreshToken,
     });
     return response.data;
