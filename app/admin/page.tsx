@@ -260,36 +260,60 @@ export default function AdminDashboard() {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {fields.map((field) => (
-                    <tr key={field.id}>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {field.name}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {field.location}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {formatCurrency(field.price)}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {formatDate(field.created_at)}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                        <button
-                          onClick={() => handleEditField(field)}
-                          className="text-blue-600 hover:text-blue-900"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => handleDeleteField(field.id)}
-                          className="text-red-600 hover:text-red-900"
-                        >
-                          Hapus
-                        </button>
+                  {loading ? (
+                    <tr>
+                      <td colSpan={5} className="px-6 py-4 text-center">
+                        <LoadingSpinner />
+                        <p className="mt-2 text-gray-600">
+                          Memuat data lapangan...
+                        </p>
                       </td>
                     </tr>
-                  ))}
+                  ) : fields.length === 0 ? (
+                    <tr>
+                      <td colSpan={5} className="px-6 py-8 text-center">
+                        <div className="text-4xl mb-2">🏟️</div>
+                        <p className="text-gray-600">
+                          Belum ada lapangan yang terdaftar
+                        </p>
+                        <p className="text-gray-500 text-sm mt-1">
+                          Klik &quot;Tambah Lapangan&quot; untuk menambah yang
+                          pertama
+                        </p>
+                      </td>
+                    </tr>
+                  ) : (
+                    fields.map((field) => (
+                      <tr key={field.id}>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          {field.name}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {field.location}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {formatCurrency(field.price)}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {formatDate(field.created_at)}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                          <button
+                            onClick={() => handleEditField(field)}
+                            className="text-blue-600 hover:text-blue-900"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => handleDeleteField(field.id)}
+                            className="text-red-600 hover:text-red-900"
+                          >
+                            Hapus
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  )}
                 </tbody>
               </table>
             </div>

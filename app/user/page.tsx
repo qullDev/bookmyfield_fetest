@@ -338,39 +338,56 @@ export default function UserDashboard() {
 
             {/* Fields Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {fields.map((field) => (
-                <div
-                  key={field.id}
-                  className="bg-white rounded-lg shadow-lg overflow-hidden"
-                >
-                  <div className="p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-lg font-semibold text-gray-900">
-                        {field.name}
-                      </h3>
-                      <span className="text-2xl">🏟️</span>
-                    </div>
-
-                    <div className="space-y-2 mb-4">
-                      <div className="flex items-center text-sm text-gray-600">
-                        <span className="mr-2">📍</span>
-                        {field.location}
-                      </div>
-                      <div className="flex items-center text-sm text-gray-600">
-                        <span className="mr-2">💰</span>
-                        {formatCurrency(field.price)}
-                      </div>
-                    </div>
-
-                    <button
-                      onClick={() => handleBookField(field)}
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors duration-200"
-                    >
-                      Book Sekarang
-                    </button>
-                  </div>
+              {loading ? (
+                <div className="col-span-full text-center py-8">
+                  <LoadingSpinner />
+                  <p className="mt-2 text-gray-600">Memuat data lapangan...</p>
                 </div>
-              ))}
+              ) : fields.length === 0 ? (
+                <div className="col-span-full text-center py-8">
+                  <div className="text-6xl mb-4">🏟️</div>
+                  <p className="text-gray-600">
+                    Tidak ada lapangan yang tersedia
+                  </p>
+                  <p className="text-gray-500 text-sm mt-2">
+                    Periksa koneksi atau coba lagi nanti
+                  </p>
+                </div>
+              ) : (
+                fields.map((field) => (
+                  <div
+                    key={field.id}
+                    className="bg-white rounded-lg shadow-lg overflow-hidden"
+                  >
+                    <div className="p-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="text-lg font-semibold text-gray-900">
+                          {field.name}
+                        </h3>
+                        <span className="text-2xl">🏟️</span>
+                      </div>
+
+                      <div className="space-y-2 mb-4">
+                        <div className="flex items-center text-sm text-gray-600">
+                          <span className="mr-2">📍</span>
+                          {field.location}
+                        </div>
+                        <div className="flex items-center text-sm text-gray-600">
+                          <span className="mr-2">💰</span>
+                          {formatCurrency(field.price)}
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => handleBookField(field)}
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors duration-200"
+                      >
+                        Book Sekarang
+                      </button>
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         )}
