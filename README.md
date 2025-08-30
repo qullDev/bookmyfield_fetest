@@ -1,36 +1,200 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BookMyField Frontend
 
-## Getting Started
+Frontend sederhana untuk demonstrasi API BookMyField yang dibangun dengan Next.js 15, TypeScript, dan Tailwind CSS.
 
-First, run the development server:
+## 🚀 Quick Start
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+1. **Install dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+2. **Setup environment variables:**
+   Pastikan file `.env.local` sudah ada dengan konfigurasi:
+
+   ```
+   NEXT_PUBLIC_API_BASE_URL=http://localhost:8080/api/v1
+   ```
+
+3. **Jalankan development server:**
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Buka aplikasi di browser:**
+   ```
+   http://localhost:3000
+   ```
+
+## 📱 Features
+
+### Landing Page
+
+- Overview fitur BookMyField
+- Link ke halaman login/register
+- Informasi demo account
+
+### Authentication
+
+- Login dan Register form
+- Demo buttons untuk quick login
+- JWT token management
+- Auto redirect berdasarkan role
+
+### Admin Dashboard
+
+- 👑 **Admin Panel** (login: admin@admin.com / password123)
+  - CRUD operations untuk lapangan
+  - Monitor semua booking
+  - Dashboard statistik
+  - Management lapangan (create, edit, delete)
+
+### User Dashboard
+
+- 👤 **User Panel** (login: user@user.com / password123)
+  - Browse dan filter lapangan
+  - Booking lapangan dengan date/time picker
+  - Riwayat booking dengan status
+  - Integrasi pembayaran Stripe
+  - Cancel booking dengan refund
+
+## 🏗️ Tech Stack
+
+- **Framework:** Next.js 15 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **HTTP Client:** Axios
+- **Notifications:** React Hot Toast
+- **State Management:** React Hooks (useState, useEffect)
+
+## 📁 Project Structure
+
+```
+app/
+├── auth/                 # Login/Register page
+├── admin/               # Admin dashboard
+├── user/                # User dashboard
+├── layout.tsx           # Root layout with Toaster
+└── page.tsx             # Landing page
+
+components/
+├── Navbar.tsx           # Navigation component
+└── LoadingSpinner.tsx   # Loading component
+
+lib/
+├── api.ts              # Axios configuration
+├── authService.ts      # Authentication API calls
+├── fieldService.ts     # Field management API calls
+├── bookingService.ts   # Booking API calls
+└── paymentService.ts   # Payment API calls
+
+types/
+└── index.ts            # TypeScript type definitions
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔐 Demo Accounts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Aplikasi ini menyediakan 2 demo account untuk testing:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Admin Account
 
-## Learn More
+- **Email:** admin@admin.com
+- **Password:** password123
+- **Features:**
+  - Manage fields (CRUD)
+  - View all bookings
+  - Admin dashboard
 
-To learn more about Next.js, take a look at the following resources:
+### User Account
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Email:** user@user.com
+- **Password:** password123
+- **Features:**
+  - Browse and filter fields
+  - Create bookings
+  - Payment integration
+  - View booking history
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔌 API Integration
 
-## Deploy on Vercel
+Frontend ini terintegrasi penuh dengan BookMyField API:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Auth Endpoints
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `POST /auth/login` - User login
+- `POST /auth/register` - User registration
+- `POST /auth/logout` - User logout
+- `POST /auth/refresh` - Refresh access token
+
+### Fields Endpoints
+
+- `GET /fields` - Get all fields (with filters)
+- `GET /fields/:id` - Get field by ID
+- `POST /fields/admin` - Create field (admin only)
+- `PUT /fields/admin/:id` - Update field (admin only)
+- `DELETE /fields/admin/:id` - Delete field (admin only)
+
+### Bookings Endpoints
+
+- `GET /bookings` - Get all bookings (admin only)
+- `GET /bookings/me` - Get user's bookings
+- `POST /bookings` - Create booking
+- `DELETE /bookings/:id` - Cancel booking
+
+### Payments Endpoints
+
+- `POST /payments/create-checkout-session` - Create Stripe checkout
+
+## 🎨 UI/UX Features
+
+- **Responsive Design:** Mobile-first approach dengan Tailwind CSS
+- **Role-based Navigation:** Berbeda untuk admin dan user
+- **Loading States:** Loading spinners untuk better UX
+- **Toast Notifications:** Success/error feedback
+- **Form Validation:** Client-side validation
+- **Modal Forms:** Clean modal interfaces
+- **Date/Time Pickers:** Native HTML5 datetime inputs
+- **Filtering:** Advanced field filtering
+- **Currency Formatting:** IDR currency display
+
+## 🚦 Getting Started untuk Presentasi
+
+1. **Start Backend API** (di terminal terpisah):
+
+   ```bash
+   # Pastikan Go backend running di port 8080
+   go run ./cmd/api/main.go
+   ```
+
+2. **Start Frontend** (di terminal ini):
+
+   ```bash
+   npm run dev
+   ```
+
+3. **Demo Flow:**
+   - Buka http://localhost:3000
+   - Klik "Mulai Sekarang"
+   - Login sebagai admin (klik "👑 Login Admin")
+   - Demo admin features: create field, view bookings
+   - Logout dan login sebagai user (klik "👤 Login User")
+   - Demo user features: browse fields, create booking
+   - Test payment flow dengan Stripe
+
+## 🔧 Environment Configuration
+
+Pastikan backend API running di `http://localhost:8080` atau update `NEXT_PUBLIC_API_BASE_URL` di `.env.local` sesuai dengan URL backend Anda.
+
+## 📝 Notes
+
+- Frontend ini dibuat untuk **demo/presentasi** API BookMyField
+- Authentication menggunakan JWT dengan localStorage
+- Role detection berdasarkan email (demo purposes)
+- Error handling dengan toast notifications
+- Auto-redirect berdasarkan authentication status
+
+---
+
+**Happy Coding!** 🚀
