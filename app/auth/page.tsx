@@ -94,7 +94,7 @@ export default function AuthPage() {
         <form onSubmit={handleSubmit} className="space-y-6">
           {!isLogin && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-black mb-2">
                 Nama Lengkap
               </label>
               <input
@@ -110,7 +110,7 @@ export default function AuthPage() {
           )}
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-black mb-2">
               Email
             </label>
             <input
@@ -125,7 +125,7 @@ export default function AuthPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-black mb-2">
               Password
             </label>
             <input
@@ -183,7 +183,7 @@ export default function AuthPage() {
         <div className="mt-6 text-center">
           <button
             onClick={() => router.push("/")}
-            className="text-gray-500 hover:text-gray-700 text-sm"
+            className="text-gray-500 hover:text-black text-sm"
           >
             ← Kembali ke beranda
           </button>
