@@ -9,8 +9,35 @@ export const authService = {
       console.log("Login response received:", response);
       return response.data;
     } catch (error) {
-      console.error("Login error:", error);
-      throw error;
+      console.error("Login error with axios:", error);
+
+      // Fallback to fetch API if axios fails
+      console.log("Trying fallback with fetch API...");
+      try {
+        const API_BASE_URL =
+          process.env.NEXT_PUBLIC_API_BASE_URL ||
+          "http://localhost:8080/api/v1";
+        const fetchResponse = await fetch(`${API_BASE_URL}/auth/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(credentials),
+        });
+
+        if (!fetchResponse.ok) {
+          throw new Error(
+            `HTTP ${fetchResponse.status}: ${fetchResponse.statusText}`
+          );
+        }
+
+        const data = await fetchResponse.json();
+        console.log("Fetch login successful:", data);
+        return data;
+      } catch (fetchError) {
+        console.error("Fetch login also failed:", fetchError);
+        throw fetchError;
+      }
     }
   },
 
