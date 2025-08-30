@@ -86,7 +86,7 @@ export default function AuthPage() {
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             🏟️ BookMyField
           </h1>
-          <p className="text-gray-600">
+          <p className="text-black">
             {isLogin ? "Masuk ke akun Anda" : "Buat akun baru"}
           </p>
         </div>
@@ -103,7 +103,7 @@ export default function AuthPage() {
                 value={formData.name}
                 onChange={handleChange}
                 required={!isLogin}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                 placeholder="Masukkan nama lengkap"
               />
             </div>
@@ -119,7 +119,7 @@ export default function AuthPage() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
               placeholder="Masukkan email"
             />
           </div>
@@ -134,7 +134,7 @@ export default function AuthPage() {
               value={formData.password}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
               placeholder="Masukkan password"
             />
           </div>
@@ -150,7 +150,7 @@ export default function AuthPage() {
 
         {isLogin && (
           <div className="mt-6 space-y-2">
-            <p className="text-sm text-gray-600 text-center">Demo Accounts:</p>
+            <p className="text-sm text-black text-center">Demo Accounts:</p>
             <div className="flex gap-2">
               <button
                 onClick={() => fillDemoData("admin")}
@@ -169,7 +169,7 @@ export default function AuthPage() {
         )}
 
         <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-black">
             {isLogin ? "Belum punya akun?" : "Sudah punya akun?"}
             <button
               onClick={() => setIsLogin(!isLogin)}
@@ -183,7 +183,7 @@ export default function AuthPage() {
         <div className="mt-6 text-center">
           <button
             onClick={() => router.push("/")}
-            className="text-gray-500 hover:text-gray-900 text-sm"
+            className="text-black hover:text-gray-900 text-sm"
           >
             ← Kembali ke beranda
           </button>

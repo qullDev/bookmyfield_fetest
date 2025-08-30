@@ -377,7 +377,7 @@ export default function AdminDashboard() {
                       setFieldForm({ ...fieldForm, name: e.target.value })
                     }
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                     placeholder="Contoh: Lapangan Futsal A"
                   />
                 </div>
@@ -393,7 +393,7 @@ export default function AdminDashboard() {
                       setFieldForm({ ...fieldForm, location: e.target.value })
                     }
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                     placeholder="Contoh: Jakarta"
                   />
                 </div>
@@ -413,7 +413,7 @@ export default function AdminDashboard() {
                     }
                     required
                     min="0"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                     placeholder="Contoh: 200000"
                   />
                 </div>

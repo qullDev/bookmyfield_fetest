@@ -281,7 +281,7 @@ export default function UserDashboard() {
                     onChange={(e) =>
                       setFilters({ ...filters, location: e.target.value })
                     }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                     placeholder="Cari berdasarkan lokasi"
                   />
                 </div>
@@ -296,7 +296,7 @@ export default function UserDashboard() {
                     onChange={(e) =>
                       setFilters({ ...filters, min_price: e.target.value })
                     }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                     placeholder="Harga minimum"
                   />
                 </div>
@@ -311,7 +311,7 @@ export default function UserDashboard() {
                     onChange={(e) =>
                       setFilters({ ...filters, max_price: e.target.value })
                     }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                     placeholder="Harga maksimum"
                   />
                 </div>
@@ -505,7 +505,7 @@ export default function UserDashboard() {
                     }
                     required
                     min={getMinDateTime()}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                   />
                 </div>
 
@@ -528,7 +528,7 @@ export default function UserDashboard() {
                     }
                     required
                     min={bookingForm.start_time || getMinDateTime()}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                   />
                 </div>
 
