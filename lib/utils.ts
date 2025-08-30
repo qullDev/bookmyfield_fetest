@@ -12,7 +12,20 @@ export const getErrorMessage = (error: unknown): string => {
         statusText?: string;
       };
       message?: string;
+      code?: string;
     };
+
+    // Handle network errors (no response from server)
+    if (!apiError.response) {
+      console.log("Network error detected - no response");
+      if (apiError.code === "ECONNABORTED") {
+        return "Koneksi timeout. Server tidak merespons dalam waktu yang ditentukan.";
+      }
+      if (apiError.message?.includes("Network Error")) {
+        return "Tidak dapat terhubung ke server. Periksa koneksi internet Anda.";
+      }
+      return "Koneksi ke server gagal. Silakan coba lagi.";
+    }
 
     // If it's a successful response (200-299), don't treat as error
     if (

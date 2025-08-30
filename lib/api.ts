@@ -45,19 +45,29 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.error(
-      "API Error:",
-      error.config?.url,
-      error.response?.status,
-      error.response?.data
-    );
-    if (error.response?.status === 401) {
+    console.error("API Error details:", {
+      message: error.message,
+      code: error.code,
+      url: error.config?.url,
+      status: error.response?.status,
+      statusText: error.response?.statusText,
+      data: error.response?.data,
+      isNetworkError: !error.response,
+      isTimeout: error.code === "ECONNABORTED",
+    });
+
+    // Handle network errors differently from HTTP errors
+    if (!error.response) {
+      console.error("Network Error - No response from server");
+      error.message = "Koneksi ke server gagal. Periksa koneksi internet Anda.";
+    } else if (error.response.status === 401) {
       // Token expired or invalid
       localStorage.removeItem("access_token");
       localStorage.removeItem("refresh_token");
       localStorage.removeItem("user_role");
       window.location.href = "/auth";
     }
+
     return Promise.reject(error);
   }
 );

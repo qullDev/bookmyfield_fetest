@@ -3,40 +3,49 @@ import { AuthRequest, LoginResponse } from "@/types";
 
 export const authService = {
   async login(credentials: AuthRequest): Promise<LoginResponse> {
+    console.log("Attempting login with:", credentials);
+
+    // Try fetch API first (better CORS handling)
     try {
-      console.log("Attempting login with:", credentials);
-      const response = await api.post("/auth/login", credentials);
-      console.log("Login response received:", response);
-      return response.data;
-    } catch (error) {
-      console.error("Login error with axios:", error);
+      const API_BASE_URL =
+        process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080/api/v1";
 
-      // Fallback to fetch API if axios fails
-      console.log("Trying fallback with fetch API...");
+      console.log("Using fetch API with URL:", `${API_BASE_URL}/auth/login`);
+
+      const fetchResponse = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(credentials),
+      });
+
+      console.log("Fetch response status:", fetchResponse.status);
+      console.log("Fetch response ok:", fetchResponse.ok);
+
+      if (!fetchResponse.ok) {
+        const errorText = await fetchResponse.text();
+        console.error("Fetch error response:", errorText);
+        throw new Error(
+          `HTTP ${fetchResponse.status}: ${fetchResponse.statusText}`
+        );
+      }
+
+      const data = await fetchResponse.json();
+      console.log("Fetch login successful:", data);
+      return data;
+    } catch (fetchError) {
+      console.error("Fetch login failed:", fetchError);
+
+      // Fallback to axios
+      console.log("Trying fallback with axios...");
       try {
-        const API_BASE_URL =
-          process.env.NEXT_PUBLIC_API_BASE_URL ||
-          "http://localhost:8080/api/v1";
-        const fetchResponse = await fetch(`${API_BASE_URL}/auth/login`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(credentials),
-        });
-
-        if (!fetchResponse.ok) {
-          throw new Error(
-            `HTTP ${fetchResponse.status}: ${fetchResponse.statusText}`
-          );
-        }
-
-        const data = await fetchResponse.json();
-        console.log("Fetch login successful:", data);
-        return data;
-      } catch (fetchError) {
-        console.error("Fetch login also failed:", fetchError);
-        throw fetchError;
+        const response = await api.post("/auth/login", credentials);
+        console.log("Axios login successful:", response);
+        return response.data;
+      } catch (axiosError) {
+        console.error("Axios login also failed:", axiosError);
+        throw fetchError; // Throw the original fetch error
       }
     }
   },
